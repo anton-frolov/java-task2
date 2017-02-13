@@ -1,0 +1,46 @@
+body {
+    font-family: 'Droid Sans', sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+html {
+	height: 100%;
+	font-family:  verdana, arial, helvetica, sans-serif;
+	color: #000000;
+	display: block;
+	/*background: #D3DFE9;*/
+}
+
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+
+#loginModalBox{
+	top: 25%
+
+}
+
+
