@@ -12,17 +12,17 @@ import rt.task2.data.domain.User;
 
 public class LoginService {
 	
-	private static DaoFactory<Connection> factory;
+	/*private static DaoFactory<Connection> factory;
 	
 	
 	protected static DaoFactory<Connection> getFactory(){
 		
 		if(factory==null){
-			factory = new DaoFactoryImpl();
+			factory = DaoFactoryImpl.getInstance();
 		}
 		return factory;
 		
-	}
+	}*/
 	
 	public boolean authenticateUser(String userId, String password) throws PersistException, SQLException {
         
@@ -36,7 +36,8 @@ public class LoginService {
 
 	public User getUserByUserId(String userId) throws PersistException, SQLException {
 		
-		Connection connection = getFactory().getContext(); 
+		DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
+		Connection connection = factory.getContext(); 
 		connection.setAutoCommit(true);
 	    @SuppressWarnings("unchecked")
 		GenericDao<User, Long> dao = factory.getDao(connection, User.class);
@@ -59,7 +60,8 @@ public class LoginService {
 	
 	public User registrationUser(String userId, String password, String userEmail, boolean autoCommit) throws PersistException, SQLException{
 
-		Connection connection = getFactory().getContext(); 
+		DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
+		Connection connection = factory.getContext(); 
 		connection.setAutoCommit(autoCommit);
 	    @SuppressWarnings("unchecked")
 		GenericDao<User, Long> dao = factory.getDao(connection, User.class);

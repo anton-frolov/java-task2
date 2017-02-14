@@ -39,9 +39,10 @@ ALTER TABLE "user"
    ADD CONSTRAINT chk_user_login_unic UNIQUE (login);
 
 INSERT INTO public."user"(login, passwd, person_id, email) VALUES('guest', 'guest', null, null);
-
 select nextval ('user_id_seq'::regclass);
 
+INSERT INTO public."user"(login, passwd, person_id, email) VALUES('test2', 'test2', null, null);
+select nextval ('user_id_seq'::regclass);
 
 
 CREATE TABLE public."role"(
@@ -104,3 +105,6 @@ select nextval ('person_id_seq'::regclass);
 INSERT INTO public.ticket(person_id, theme, body) VALUES (1,'test theme', 'test message');
 select nextval ('ticket_id_seq'::regclass);
 INSERT INTO public.ticket_recipient(ticket_id, person_id) VALUES (1, 1);
+
+INSERT INTO public.person(first_name, middle_name, last_name, email) VALUES('test2', 'test2', 'test2', null);
+select nextval ('person_id_seq'::regclass);

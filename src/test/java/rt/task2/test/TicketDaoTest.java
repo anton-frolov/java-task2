@@ -25,7 +25,7 @@ public class TicketDaoTest {
     private GenericDao<Ticket, Long> dao;
     private GenericDao<Person, Long> personDao;
     
-    private static final DaoFactory<Connection> factory = new DaoFactoryImpl();
+    private static final DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
     
     public Connection context() {
         return connection;

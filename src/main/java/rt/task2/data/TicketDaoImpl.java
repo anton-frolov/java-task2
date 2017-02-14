@@ -158,7 +158,7 @@ public class TicketDaoImpl extends AbstractDaoImpl<Ticket, Long> {
 						throw new PersistException(e);
 					}
 				}
-	            
+	            statement.close();
 	        } catch (Exception e) {
 	            throw new PersistException(e);
 	        }	
@@ -169,7 +169,7 @@ public class TicketDaoImpl extends AbstractDaoImpl<Ticket, Long> {
 	public Ticket getById(Long id) throws PersistException {
 		 Ticket ticket  = super.getById(id);
 		 if(ticket!=null){
-			 DaoFactory<Connection> factory = new DaoFactoryImpl();
+			 DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
 			 GenericDao<Person, Long> personDao = factory.getDao(connection, Person.class);
 			 Person person = personDao.getById(ticket.getSender().getId());
 			 ticket.setSender(person);
@@ -186,7 +186,7 @@ public class TicketDaoImpl extends AbstractDaoImpl<Ticket, Long> {
 	public List<Ticket> getAll() throws PersistException {
 		List<Ticket> tickets = super.getAll();
 		if(tickets!=null&&tickets.size()>0){
-			DaoFactory<Connection> factory = new DaoFactoryImpl();
+			DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
 			GenericDao<Person, Long> personDao = factory.getDao(connection, Person.class);
 			for (Ticket ticket : tickets) {
 				Person person = personDao.getById(ticket.getSender().getId());
@@ -204,7 +204,7 @@ public class TicketDaoImpl extends AbstractDaoImpl<Ticket, Long> {
 	public List<Ticket> query(String query, Object[] params) throws PersistException {
 		List<Ticket> tickets = super.query(query, params);
 		if(tickets!=null&&tickets.size()>0){
-			DaoFactory<Connection> factory = new DaoFactoryImpl();
+			DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
 			GenericDao<Person, Long> personDao = factory.getDao(connection, Person.class);
 			for (Ticket ticket : tickets) {
 				Person person = personDao.getById(ticket.getSender().getId());

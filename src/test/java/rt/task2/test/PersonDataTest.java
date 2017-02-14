@@ -25,7 +25,7 @@ public class PersonDataTest {
 
     private GenericDao<Person, Long> dao;
     
-    private static final DaoFactory<Connection> factory = new DaoFactoryImpl();
+    private static final DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
     
     public Connection context() {
         return connection;
@@ -67,7 +67,7 @@ public class PersonDataTest {
     }
     
     @Test
-    public void testUpdateUser() throws Exception{
+    public void testUpdatePerson() throws Exception{
     	
     	Person person = dao.getById(1L);
     	Assert.assertNotNull(person);
@@ -89,12 +89,12 @@ public class PersonDataTest {
     }
     
     @Test
-    public void testDeleteUser() throws Exception{
-    	Person person = dao.getById(1L);
+    public void testDeletePerson() throws Exception{
+    	Person person = dao.getById(2L);
     	Assert.assertNotNull(person);
     	dao.delete(person);
     	person = null;
-    	person = dao.getById(1L);
+    	person = dao.getById(2L);
     	Assert.assertNull(person);
     }
 

@@ -16,12 +16,12 @@ public class LoginServiceTest {
 	
 	@Test
 	public void testAuthenticateUser() throws PersistException, SQLException{
-		Assert.assertTrue(service.authenticateUser("test", "test"));	
+		Assert.assertTrue(service.authenticateUser("test2", "test2"));	
 	}
 	
 	@Test
 	public void testGetUserByUserId() throws PersistException, SQLException{
-		User user = service.getUserByUserId("test");
+		User user = service.getUserByUserId("test2");
 		Assert.assertNotNull(user);
 		user = service.getUserByUserId("");
 		Assert.assertNull(user);

@@ -42,6 +42,8 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity<PK>, PK extends S
             }else{
             	throw new PersistException("Error on new persist data.");
             }
+            rs.close();
+            statement.close();
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -59,6 +61,8 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity<PK>, PK extends S
                 throw new PersistException("Exception on findByPK new persist data.");
             }
             persistInstance = list.iterator().next();
+            rs.close();
+            statement.close();
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -74,6 +78,7 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity<PK>, PK extends S
             if (count != 1) {
                 throw new PersistException("On update modify more then 1 record: " + count);
             }
+            statement.close();
         } catch (Exception e) {
             throw new PersistException(e);
         }		
@@ -108,6 +113,8 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity<PK>, PK extends S
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
+            rs.close();
+            statement.close();
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -127,6 +134,8 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity<PK>, PK extends S
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
+            rs.close();
+            statement.close();
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -147,7 +156,8 @@ public abstract class AbstractDaoImpl<T extends AbstractEntity<PK>, PK extends S
             ResultSet rs = statement.executeQuery();
             list = parseResultSet(rs);
             statement.clearParameters();                            
-           
+            rs.close();
+            statement.close();
         }
         catch (Exception ex) {
             throw new PersistException(ex.getMessage());

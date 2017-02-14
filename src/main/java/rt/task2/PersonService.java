@@ -12,21 +12,22 @@ import rt.task2.data.domain.Person;
 
 public class PersonService {
 	
-private static DaoFactory<Connection> factory;
+/*private static DaoFactory<Connection> factory;
 	
 	
 	protected static DaoFactory<Connection> getFactory(){
 		
 		if(factory==null){
-			factory = new DaoFactoryImpl();
+			factory = DaoFactoryImpl.getInstance();
 		}
 		return factory;
 		
-	}
+	}*/
 	
 	public List<Person> getPersons() throws PersistException, SQLException{
 		
-		Connection connection = getFactory().getContext(); 
+		DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
+		Connection connection = factory.getContext(); 
 		connection.setAutoCommit(true);
 	    @SuppressWarnings("unchecked")
 		GenericDao<Person, Long> dao = factory.getDao(connection, Person.class);

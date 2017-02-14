@@ -16,22 +16,23 @@ import rt.task2.data.domain.User;
 
 public class TicketsService {
 	
-	private static DaoFactory<Connection> factory;
+	/*private static DaoFactory<Connection> factory;
 	
 	
 	protected static DaoFactory<Connection> getFactory(){
 		
 		if(factory==null){
-			factory = new DaoFactoryImpl();
+			factory = DaoFactoryImpl.getInstance();
 		}
 		return factory;
 		
-	}
+	}*/
 	
 	
 	public List<Ticket> getTickets() throws PersistException, SQLException{
 		
-		Connection connection = getFactory().getContext(); 
+		DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
+		Connection connection = factory.getContext(); 
 		connection.setAutoCommit(true);
 	    @SuppressWarnings("unchecked")
 		GenericDao<Ticket, Long> dao = factory.getDao(connection, Ticket.class);
@@ -42,7 +43,8 @@ public class TicketsService {
 	
 	public Ticket saveTicket(String firstName, String middleName,	String lastName, long[] recipients,	String theme, String messageBody) throws PersistException, SQLException{
 		
-		Connection connection = getFactory().getContext(); 
+		DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
+		Connection connection = factory.getContext();  
 		connection.setAutoCommit(true);
 	    @SuppressWarnings("unchecked")
 		GenericDao<Ticket, Long> dao = factory.getDao(connection, Ticket.class);

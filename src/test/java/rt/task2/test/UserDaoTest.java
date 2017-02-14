@@ -23,7 +23,7 @@ public class UserDaoTest {
 
     private GenericDao<User, Long> dao;
     
-    private static final DaoFactory<Connection> factory = new DaoFactoryImpl();
+    private static final DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
     
     public Connection context() {
         return connection;
@@ -66,18 +66,18 @@ public class UserDaoTest {
     @Test
     public void testUpdateUser() throws Exception{
     	
-    	User user = dao.getById(1L);
+    	User user = dao.getById(2L);
     	Assert.assertNotNull(user);
     	Assert.assertNotNull(user.getUserId());
-    	Assert.assertTrue(user.getUserId().equals("test"));
+    	Assert.assertTrue(user.getUserId().equals("test2"));
     	Assert.assertNotNull(user.getPassword());
-    	Assert.assertTrue(user.getPassword().equals("test"));
+    	Assert.assertTrue(user.getPassword().equals("test2"));
     	user.setUserId("newLogin");
     	user.setPassword("newPasswd");
     	user.setEmail("newemail@test.ru");
     	dao.update(user);
     	user = null;
-    	user = dao.getById(1L);
+    	user = dao.getById(2L);
     	Assert.assertNotNull(user);
     	Assert.assertTrue(user.getUserId().equals("newLogin"));
     	Assert.assertTrue(user.getPassword().equals("newPasswd")); 
@@ -86,11 +86,11 @@ public class UserDaoTest {
     
     @Test
     public void testDeleteUser() throws Exception{
-    	User user = dao.getById(1L);
+    	User user = dao.getById(2L);
     	Assert.assertNotNull(user);
     	dao.delete(user);
     	user = null;
-    	user = dao.getById(1L);
+    	user = dao.getById(2L);
     	Assert.assertNull(user);
     }
 
@@ -109,7 +109,7 @@ public class UserDaoTest {
     @Test
    	public void testQuery() throws Exception {
     	String sql = dao.getSelectQuery()+ " WHERE id = ? and login=? ORDER BY ID;";
-    	Object[] params = {1L,"test"};
+    	Object[] params = {2L,"test2"};
        	List<User> list = dao.query(sql, params);
        	Assert.assertNotNull(list);
        	Assert.assertTrue(list.size() > 0);

@@ -54,7 +54,13 @@
 	    <artifactId>postgresql</artifactId>
 	    <version>9.4.1212</version>
 	</dependency>
-	
+	<!-- Tomcat pool -->
+	<dependency>
+	    <groupId>org.apache.tomcat</groupId>
+	    <artifactId>tomcat-jdbc</artifactId>
+	    <version>8.5.9</version>
+	</dependency>
+		
 	<!-- Test -->	
     <dependency>
       	<groupId>junit</groupId>
