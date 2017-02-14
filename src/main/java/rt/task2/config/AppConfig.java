@@ -41,6 +41,8 @@ public class AppConfig {
 	    password = prop.getProperty("db.password");
 	    url = prop.getProperty("db.url");
 	    driver = prop.getProperty("db.driver");
+	    initialSize = Integer.parseInt(prop.getProperty("pool.initialSize"));
+	    maxActive = Integer.parseInt(prop.getProperty("pool.maxActive"));
 
 	} catch (IOException e) {
 	    e.printStackTrace();

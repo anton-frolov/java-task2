@@ -33,6 +33,7 @@ public class LoginService {
 	Object[] params = new Object[1];
 	params[0] = userId;
 	List<User> list = dao.query(sql, params);
+	System.out.println("connecton "+connection.hashCode()+" release");
 	connection.close();
 	if (list != null && list.size() > 0) {
 	    return list.get(0);
@@ -60,6 +61,7 @@ public class LoginService {
 	user.setPassword(password);
 	user.setEmail(userEmail);
 	dao.update(user);
+	System.out.println("connecton "+connection.hashCode()+" release");
 	connection.close();
 	return user;
     }

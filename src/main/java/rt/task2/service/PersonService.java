@@ -20,6 +20,7 @@ public class PersonService {
 	@SuppressWarnings("unchecked")
 	GenericDao<Person, Long> dao = factory.getDao(connection, Person.class);
 	List<Person> list = dao.getAll();
+	System.out.println("connecton "+connection.hashCode()+" release");
 	connection.close();
 	return list;
     }

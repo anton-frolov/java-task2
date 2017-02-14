@@ -17,12 +17,13 @@ public class TicketsService {
     public List<Ticket> getTickets() throws PersistException, SQLException {
 
 	DaoFactory<Connection> factory = DaoFactoryImpl.getInstance();
-	Connection connection = factory.getContext();
+	Connection connection = factory.getContext();//получаем соединение из пула
 	connection.setAutoCommit(true);
 	@SuppressWarnings("unchecked")
 	GenericDao<Ticket, Long> dao = factory.getDao(connection, Ticket.class);
 	List<Ticket> list = dao.getAll();
-	connection.close();
+	System.out.println("connecton "+connection.hashCode()+" release");
+	connection.close();//возвращаем в пул
 	return list;
     }
 
@@ -58,6 +59,7 @@ public class TicketsService {
 	    ticket.getRecipients().add(personDao.getById(recipients[i]));
 	}
 	dao.update(ticket);
+	System.out.println("connecton "+connection.hashCode()+" release");
 	connection.close();
 	return ticket;
     }
