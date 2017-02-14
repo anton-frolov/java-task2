@@ -1,18 +1,29 @@
 package rt.task2.data;
 
 public class PersistException extends Exception {
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	public PersistException(Exception e) {
-		// TODO Auto-generated constructor stub
-	}
+    private String messageDetail;
 
-	public PersistException(String string) {
-		// TODO Auto-generated constructor stub
-	}
+    public PersistException(String message, Throwable cause) {
+	super(message, cause);
+	this.setMessageDetail(message);
+    }
+
+    public PersistException(Throwable cause) {
+	super(cause);
+    }
+
+    public PersistException(String string) {
+	this.setMessageDetail(string);
+    }
+
+    public String getMessageDetail() {
+	return messageDetail;
+    }
+
+    public void setMessageDetail(String messageDetail) {
+	this.messageDetail = messageDetail;
+    }
 
 }

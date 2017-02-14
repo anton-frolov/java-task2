@@ -13,50 +13,45 @@ import com.google.gson.Gson;
 
 import rt.task2.data.PersistException;
 import rt.task2.data.domain.Person;
+import rt.task2.service.PersonService;
 
-public class PersonsServlet extends HttpServlet{
+public class PersonsServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	doPost(request, response);
+    }
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doPost(req, resp);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+
+	PersonService service = new PersonService();
+	try {
+
+	    List<Person> persons = service.getPersons();
+	    String json = new Gson().toJson(new JsonContainer("success", persons));
+	    response.setContentType("application/json");
+	    response.setCharacterEncoding("UTF-8");
+	    response.getWriter().write(json);
+
+	} catch (PersistException e) {
+	    e.printStackTrace();
+	} catch (SQLException e) {
+	    e.printStackTrace();
 	}
+    }
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		PersonService service = new PersonService();
-		StringBuilder res = new StringBuilder();
-		try {
+    private class JsonContainer {
+	String result;
+	List<Person> persons;
 
-			List<Person> persons = service.getPersons();
-			String json = new Gson().toJson(new JsonContainer("success", persons));
-			resp.setContentType("application/json");
-			resp.setCharacterEncoding("UTF-8");
-			resp.getWriter().write(json);
-			
-			
-		} catch (PersistException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public JsonContainer(String result, List<Person> persons) {
+	    this.result = result;
+	    this.persons = persons;
 	}
-	
-	private class JsonContainer {
-		
-		String result;
-		List<Person> persons;
-		
-		public JsonContainer(String result, List<Person> persons) {
-
-			this.result = result;
-			this.persons = persons;
-		}
-	}
+    }
 
 }

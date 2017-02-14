@@ -231,16 +231,16 @@
 						var $data =  data;
 						if ($data.result == "success") {
 							$('#contactForm').hide();
-							$('#successRegMessage').removeClass('hidden');
+							$('#successMessage').removeClass('hidden');
 						}
 						else{
-							$('#errorRegMessage').removeClass('hidden');
+							$('#successMessage').removeClass('hidden');
 							$('#errorMessage').text(request.responseText);
 						}
 			        	
 			        },
 			        error: function (request){
-						$('#errorRegMessage').removeClass('hidden');
+						$('#successMessage').removeClass('hidden');
 						$('#errorMessage').text(request.responseText);
 			        }
 			    	

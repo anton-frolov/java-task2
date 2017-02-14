@@ -5,207 +5,206 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class AppConfig {
-	
-	public static final AppConfig instance = new AppConfig();
 
-	private String user;
-	private String password;
-	private String driver;
-	private String url;
-	//Tomcat pool 
-	private boolean jmxEnabled = true;
-	private boolean testWhileIdle = false;
-	private boolean testOnBorrow = true;
-	private String validationQuery = "SELECT 1";
-	private boolean testOnReturn = false;
-	private int validationInterval = 30000;
-	private int timeBetweenEvictionRunsMillis = 30000;
-	private int initialSize = 1;
-	private int maxActive = 10;
-	private int maxWait = 10000;
-	private int removeAbandonedTimeout = 30;
-	private int minEvictableIdleTimeMillis = 30000;
-	private int minIdle = 10;
-	private boolean logAbandoned = true;
-	private boolean removeAbandoned = true;
-	private String jdbcInterceptors = "org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"+
-									"org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer";
-	
-	public AppConfig() {
-		Properties prop = new Properties();
-		InputStream inStream = AppConfig.class.getClassLoader().getResourceAsStream("app.properties");
-		
-		try {
-			prop.load(inStream);
-			user = prop.getProperty("db.user");
-			password = prop.getProperty("db.password");
-			url = prop.getProperty("db.url");
-			driver = prop.getProperty("db.driver");
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
+    public static final AppConfig instance = new AppConfig();
 
-	public String getUser() {
-		return user;
-	}
+    private String user;
+    private String password;
+    private String driver;
+    private String url;
+    // Tomcat pool
+    private boolean jmxEnabled = true;
+    private boolean testWhileIdle = false;
+    private boolean testOnBorrow = true;
+    private String validationQuery = "SELECT 1";
+    private boolean testOnReturn = false;
+    private int validationInterval = 30000;
+    private int timeBetweenEvictionRunsMillis = 30000;
+    private int initialSize = 1;
+    private int maxActive = 10;
+    private int maxWait = 10000;
+    private int removeAbandonedTimeout = 30;
+    private int minEvictableIdleTimeMillis = 30000;
+    private int minIdle = 10;
+    private boolean logAbandoned = true;
+    private boolean removeAbandoned = true;
+    private String jdbcInterceptors = "org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"
+	    + "org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer";
 
-	public void setUser(String user) {
-		this.user = user;
-	}
+    public AppConfig() {
+	Properties prop = new Properties();
+	InputStream inStream = AppConfig.class.getClassLoader().getResourceAsStream("app.properties");
 
-	public String getPassword() {
-		return password;
-	}
+	try {
+	    prop.load(inStream);
+	    user = prop.getProperty("db.user");
+	    password = prop.getProperty("db.password");
+	    url = prop.getProperty("db.url");
+	    driver = prop.getProperty("db.driver");
 
-	public void setPassword(String password) {
-		this.password = password;
+	} catch (IOException e) {
+	    e.printStackTrace();
 	}
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public String getUser() {
+	return user;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+    public void setUser(String user) {
+	this.user = user;
+    }
 
-	public String getDriver() {
-		return driver;
-	}
+    public String getPassword() {
+	return password;
+    }
 
-	public void setDriver(String driver) {
-		this.driver = driver;
-	}
+    public void setPassword(String password) {
+	this.password = password;
+    }
 
-	public boolean isJmxEnabled() {
-		return jmxEnabled;
-	}
+    public String getUrl() {
+	return url;
+    }
 
-	public void setJmxEnabled(boolean jmxEnabled) {
-		this.jmxEnabled = jmxEnabled;
-	}
+    public void setUrl(String url) {
+	this.url = url;
+    }
 
-	public boolean isTestWhileIdle() {
-		return testWhileIdle;
-	}
+    public String getDriver() {
+	return driver;
+    }
 
-	public void setTestWhileIdle(boolean testWhileIdle) {
-		this.testWhileIdle = testWhileIdle;
-	}
+    public void setDriver(String driver) {
+	this.driver = driver;
+    }
 
-	public boolean isTestOnBorrow() {
-		return testOnBorrow;
-	}
+    public boolean isJmxEnabled() {
+	return jmxEnabled;
+    }
 
-	public void setTestOnBorrow(boolean testOnBorrow) {
-		this.testOnBorrow = testOnBorrow;
-	}
+    public void setJmxEnabled(boolean jmxEnabled) {
+	this.jmxEnabled = jmxEnabled;
+    }
 
-	public String getValidationQuery() {
-		return validationQuery;
-	}
+    public boolean isTestWhileIdle() {
+	return testWhileIdle;
+    }
 
-	public void setValidationQuery(String validationQuery) {
-		this.validationQuery = validationQuery;
-	}
+    public void setTestWhileIdle(boolean testWhileIdle) {
+	this.testWhileIdle = testWhileIdle;
+    }
 
-	public boolean isTestOnReturn() {
-		return testOnReturn;
-	}
+    public boolean isTestOnBorrow() {
+	return testOnBorrow;
+    }
 
-	public void setTestOnReturn(boolean testOnReturn) {
-		this.testOnReturn = testOnReturn;
-	}
+    public void setTestOnBorrow(boolean testOnBorrow) {
+	this.testOnBorrow = testOnBorrow;
+    }
 
-	public int getValidationInterval() {
-		return validationInterval;
-	}
+    public String getValidationQuery() {
+	return validationQuery;
+    }
 
-	public void setValidationInterval(int validationInterval) {
-		this.validationInterval = validationInterval;
-	}
+    public void setValidationQuery(String validationQuery) {
+	this.validationQuery = validationQuery;
+    }
 
-	public int getTimeBetweenEvictionRunsMillis() {
-		return timeBetweenEvictionRunsMillis;
-	}
+    public boolean isTestOnReturn() {
+	return testOnReturn;
+    }
 
-	public void setTimeBetweenEvictionRunsMillis(int timeBetweenEvictionRunsMillis) {
-		this.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;
-	}
+    public void setTestOnReturn(boolean testOnReturn) {
+	this.testOnReturn = testOnReturn;
+    }
 
-	public int getInitialSize() {
-		return initialSize;
-	}
+    public int getValidationInterval() {
+	return validationInterval;
+    }
 
-	public void setInitialSize(int initialSize) {
-		this.initialSize = initialSize;
-	}
+    public void setValidationInterval(int validationInterval) {
+	this.validationInterval = validationInterval;
+    }
 
-	public int getMaxActive() {
-		return maxActive;
-	}
+    public int getTimeBetweenEvictionRunsMillis() {
+	return timeBetweenEvictionRunsMillis;
+    }
 
-	public void setMaxActive(int maxActive) {
-		this.maxActive = maxActive;
-	}
+    public void setTimeBetweenEvictionRunsMillis(int timeBetweenEvictionRunsMillis) {
+	this.timeBetweenEvictionRunsMillis = timeBetweenEvictionRunsMillis;
+    }
 
-	public int getMaxWait() {
-		return maxWait;
-	}
+    public int getInitialSize() {
+	return initialSize;
+    }
 
-	public void setMaxWait(int maxWait) {
-		this.maxWait = maxWait;
-	}
+    public void setInitialSize(int initialSize) {
+	this.initialSize = initialSize;
+    }
 
-	public int getRemoveAbandonedTimeout() {
-		return removeAbandonedTimeout;
-	}
+    public int getMaxActive() {
+	return maxActive;
+    }
 
-	public void setRemoveAbandonedTimeout(int removeAbandonedTimeout) {
-		this.removeAbandonedTimeout = removeAbandonedTimeout;
-	}
+    public void setMaxActive(int maxActive) {
+	this.maxActive = maxActive;
+    }
 
-	public int getMinEvictableIdleTimeMillis() {
-		return minEvictableIdleTimeMillis;
-	}
+    public int getMaxWait() {
+	return maxWait;
+    }
 
-	public void setMinEvictableIdleTimeMillis(int minEvictableIdleTimeMillis) {
-		this.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;
-	}
+    public void setMaxWait(int maxWait) {
+	this.maxWait = maxWait;
+    }
 
-	public int getMinIdle() {
-		return minIdle;
-	}
+    public int getRemoveAbandonedTimeout() {
+	return removeAbandonedTimeout;
+    }
 
-	public void setMinIdle(int minIdle) {
-		this.minIdle = minIdle;
-	}
+    public void setRemoveAbandonedTimeout(int removeAbandonedTimeout) {
+	this.removeAbandonedTimeout = removeAbandonedTimeout;
+    }
 
-	public boolean isLogAbandoned() {
-		return logAbandoned;
-	}
+    public int getMinEvictableIdleTimeMillis() {
+	return minEvictableIdleTimeMillis;
+    }
 
-	public void setLogAbandoned(boolean logAbandoned) {
-		this.logAbandoned = logAbandoned;
-	}
+    public void setMinEvictableIdleTimeMillis(int minEvictableIdleTimeMillis) {
+	this.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;
+    }
 
-	public boolean isRemoveAbandoned() {
-		return removeAbandoned;
-	}
+    public int getMinIdle() {
+	return minIdle;
+    }
 
-	public void setRemoveAbandoned(boolean removeAbandoned) {
-		this.removeAbandoned = removeAbandoned;
-	}
+    public void setMinIdle(int minIdle) {
+	this.minIdle = minIdle;
+    }
 
-	public String getJdbcInterceptors() {
-		return jdbcInterceptors;
-	}
+    public boolean isLogAbandoned() {
+	return logAbandoned;
+    }
 
-	public void setJdbcInterceptors(String jdbcInterceptors) {
-		this.jdbcInterceptors = jdbcInterceptors;
-	}
+    public void setLogAbandoned(boolean logAbandoned) {
+	this.logAbandoned = logAbandoned;
+    }
+
+    public boolean isRemoveAbandoned() {
+	return removeAbandoned;
+    }
+
+    public void setRemoveAbandoned(boolean removeAbandoned) {
+	this.removeAbandoned = removeAbandoned;
+    }
+
+    public String getJdbcInterceptors() {
+	return jdbcInterceptors;
+    }
+
+    public void setJdbcInterceptors(String jdbcInterceptors) {
+	this.jdbcInterceptors = jdbcInterceptors;
+    }
 
 }

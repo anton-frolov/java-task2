@@ -10,53 +10,52 @@ import javax.servlet.http.HttpServletResponse;
 
 import rt.task2.data.PersistException;
 import rt.task2.data.domain.User;
-
+import rt.task2.service.LoginService;
 
 public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			
-		String userId = req.getParameter("userId");   
-		String password = req.getParameter("password");
-		LoginService loginService = new LoginService();
-		boolean remember = (req.getParameter("rememberMe")!=null) ? req.getParameter("rememberMe") != null : false;
-		boolean result;
-		try {
-			result = loginService.authenticateUser(userId, password);
-			User user = loginService.getUserByUserId(userId);
-			if(result == true){
-			    req.getSession().setAttribute("sid", user); 
-			    if (!remember) {
-			    	req.getSession().setMaxInactiveInterval(60*5); //5 мин
-				}else{
-					req.getSession().setMaxInactiveInterval(3600*24*30); //месяц
-				}
-			    resp.sendRedirect("index.jsp");
-			}
-			else{
-				req.setAttribute("errorMessage", "Ошибка авторизации! Неправильное имя пользователя или пароль");
-				req.getRequestDispatcher("error.jsp").forward(req, resp);
-			}
-			
-		} catch (PersistException e) {
-			e.printStackTrace();
-			req.setAttribute("errorMessage", e.getLocalizedMessage());
-			req.getRequestDispatcher("error.jsp").forward(req, resp);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			req.setAttribute("errorMessage", e.getLocalizedMessage());
-			req.getRequestDispatcher("error.jsp").forward(req, resp);
+	String userId = request.getParameter("userId");
+	String password = request.getParameter("password");
+	LoginService loginService = new LoginService();
+	boolean remember = (request.getParameter("rememberMe") != null) ? request.getParameter("rememberMe") != null
+		: false;
+	boolean result;
+	try {
+	    result = loginService.authenticateUser(userId, password);
+	    User user = loginService.getUserByUserId(userId);
+	    if (result == true) {
+		request.getSession().setAttribute("sid", user);
+		if (!remember) {
+		    request.getSession().setMaxInactiveInterval(60 * 5); // 5
+									 // мин
+		} else {
+		    request.getSession().setMaxInactiveInterval(3600 * 24 * 30); // месяц
 		}
-	}
+		response.sendRedirect("index.jsp");
+	    } else {
+		request.setAttribute("errorMessage", "Ошибка авторизации! Неправильное имя пользователя или пароль");
+		request.getRequestDispatcher("error.jsp").forward(request, response);
+	    }
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.sendRedirect("login.jsp");
+	} catch (PersistException e) {
+	    e.printStackTrace();
+	    request.setAttribute("errorMessage", e.getLocalizedMessage());
+	    request.getRequestDispatcher("error.jsp").forward(request, response);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    request.setAttribute("errorMessage", e.getLocalizedMessage());
+	    request.getRequestDispatcher("error.jsp").forward(request, response);
 	}
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	response.sendRedirect("login.jsp");
+    }
 
 }
