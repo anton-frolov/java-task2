@@ -81,7 +81,6 @@ public class DaoFactoryImpl implements DaoFactory<Connection> {
 	Connection connection = null;
 	try {
 	    	connection = datasource.getConnection();
-	    	System.out.println("connecton "+connection.hashCode()+" get");
 	    } catch (SQLException e) {
 	    throw new PersistException(e);
 	}
